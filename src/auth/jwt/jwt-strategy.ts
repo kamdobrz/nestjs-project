@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {PassportStrategy} from '@nestjs/passport';
 import {ExtractJwt, Strategy} from 'passport-jwt';
-import {UserInterface} from '../shared/interfaces/user.interface';
+import {UserInterface} from '../../shared/interfaces/user.interface';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
