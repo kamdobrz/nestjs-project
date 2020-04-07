@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
 import {VideoModelDto} from '../dto/videos/video.dto';
 import {VideosService} from './videos.service';
 import {VideosDto} from '../dto/videos/videos.dto';

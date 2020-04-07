@@ -1,5 +1,5 @@
 import {IsOptional, IsString} from 'class-validator';
-import {VideoInterface} from './video.interface';
+import {VideoInterface} from '../../shared/interfaces/video.interface';
 
 export class VideoModelDto {
     @IsString()

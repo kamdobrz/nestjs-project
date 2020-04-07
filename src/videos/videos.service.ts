@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { VideoModelDto } from '../dto/videos/video.dto';
-import { VideosDto } from '../dto/videos/videos.dto';
+import {Injectable} from '@nestjs/common';
+import {VideoModelDto} from '../dto/videos/video.dto';
+import {VideosDto} from '../dto/videos/videos.dto';
 
 @Injectable()
 export class VideosService {
@@ -39,7 +39,7 @@ export class VideosService {
         const video = this.videos[id];
 
         if (!video) {
-            throw Error(`No video with ${id} found!`)
+            throw Error(`No video with ${id} found!`);
         }
 
         return video;
@@ -48,7 +48,7 @@ export class VideosService {
     public update(video: VideoModelDto) {
         const {id} = video;
         if (!this.videos[id]) {
-            throw Error(`No video with ${id} found!`)
+            throw Error(`No video with ${id} found!`);
         }
 
         this.videos[id] = video;
@@ -57,7 +57,7 @@ export class VideosService {
 
     public delete(id: string) {
         if (!this.videos[id]) {
-            throw Error(`No video with ${id} found!`)
+            throw Error(`No video with ${id} found!`);
         }
 
         delete this.videos[id];
