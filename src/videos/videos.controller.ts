@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import {VideoModelDto} from '../dto/videos/video.dto';
 import {VideosService} from './videos.service';
 import {VideosDto} from '../dto/videos/videos.dto';
@@ -13,24 +13,24 @@ export class VideosController {
     }
 
     @Get(':id')
-    find(@Param('id') id: string) {
+    find(@Param('id') id: string): VideoModelDto {
         return this.videosService.find(id);
     }
 
     @Post()
-    create(@Body() VideoModelDto: VideoModelDto) {
-        this.videosService.create(VideoModelDto);
-        return VideoModelDto;
+    create(@Body() video: VideoModelDto): VideoModelDto {
+        const createdVideo = this.videosService.create(video);
+        return createdVideo;
     }
 
     @Put()
-    update(@Body() VideoModelDto: VideoModelDto) {
-        this.videosService.update(VideoModelDto);
-        return VideoModelDto;
+    update(@Body() video: VideoModelDto): VideoModelDto {
+        const createdVideo = this.videosService.update(video);
+        return createdVideo;
     }
 
     @Delete(':id')
-    delete(@Param('id') id: string) {
+    delete(@Param('id') id: string): string {
         this.videosService.delete(id);
         return id;
     }
