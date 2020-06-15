@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
-import {UserInterface} from '../shared/interfaces/user.interface';
 import * as bcrypt from 'bcrypt';
 import {UserModelDto} from '../dto/users/user.dto';
+import {UserInterface} from '../shared/interfaces/user.interface';
 
 @Injectable()
 export class UsersService {
@@ -17,14 +17,14 @@ export class UsersService {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         this.users.push({
-            username,
-            userId: Date.now().toString(),
-            password: hashedPassword
+            id: Date.now().toString(),
+            password: hashedPassword,
+            username
         });
 
         return true;
     };
 
-    public findOne = (userName: string): UserInterface =>
-        this.users.find(({username}: UserInterface) => username === userName);
+    public findOne = (username: string): UserInterface =>
+        this.users.find((user: UserInterface) => user.username === username);
 }

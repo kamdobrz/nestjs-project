@@ -10,16 +10,16 @@ export class VideoModelDto {
     readonly name: string;
 
     @IsString()
-    readonly posterImg: string;
+    readonly posterImgUrl: string;
 
     constructor(video: VideoInterface) {
         if (!video) {
             return;
         }
 
-        const {id, name, posterImg} = video;
+        const {id, name, posterImgUrl} = video;
         this.id = id;
         this.name = name;
-        this.posterImg = posterImg;
+        this.posterImgUrl = posterImgUrl;
     }
 }

@@ -1,6 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {PassportStrategy} from '@nestjs/passport';
 import {ExtractJwt, Strategy} from 'passport-jwt';
+import {UserValidationInterface} from '../../shared/interfaces/auth.interface';
 import {UserInterface} from '../../shared/interfaces/user.interface';
 import * as dotenv from 'dotenv';
 
@@ -16,8 +17,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         });
     }
 
-    public validate = ({userId, username}: UserInterface) => ({
-        userId, username
+    public validate = ({id, username}: UserInterface): UserValidationInterface => ({
+        id, username
     })
 }
 

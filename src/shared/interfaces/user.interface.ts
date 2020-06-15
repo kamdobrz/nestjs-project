@@ -1,5 +1,5 @@
-export interface UserInterface {
-    userId: string;
-    username: string;
+import {UserValidationInterface} from './auth.interface';
+
+export interface UserInterface extends UserValidationInterface{
     password: string
 }

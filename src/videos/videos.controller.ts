@@ -1,7 +1,7 @@
 import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
 import {VideoModelDto} from '../dto/videos/video.dto';
-import {VideosService} from './videos.service';
 import {VideosDto} from '../dto/videos/videos.dto';
+import {VideosService} from './videos.service';
 
 @Controller('videos')
 export class VideosController {
@@ -9,7 +9,7 @@ export class VideosController {
 
     @Get()
     index(): VideosDto {
-        return this.videosService.findAll() ;
+        return this.videosService.findAll();
     }
 
     @Get(':id')
@@ -19,14 +19,12 @@ export class VideosController {
 
     @Post()
     create(@Body() video: VideoModelDto): VideoModelDto {
-        const createdVideo = this.videosService.create(video);
-        return createdVideo;
+        return this.videosService.create(video);
     }
 
     @Put()
     update(@Body() video: VideoModelDto): VideoModelDto {
-        const createdVideo = this.videosService.update(video);
-        return createdVideo;
+        return this.videosService.update(video);
     }
 
     @Delete(':id')

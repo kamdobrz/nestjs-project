@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {Injectable, NotFoundException} from '@nestjs/common';
 import {VideoModelDto} from '../dto/videos/video.dto';
 import {VideosDto} from '../dto/videos/videos.dto';
 
@@ -8,17 +8,17 @@ export class VideosService {
         1: {
             id: '1',
             name: 'First',
-            posterImg: ''
+            posterImgUrl: ''
         },
         2: {
             id: '2',
             name: 'Second',
-            posterImg: ''
+            posterImgUrl: ''
         },
         3: {
             id: '3',
             name: 'Third',
-            posterImg: ''
+            posterImgUrl: ''
         }
     };
 
@@ -39,25 +39,25 @@ export class VideosService {
         const video = this.videos[id];
 
         if (!video) {
-            throw Error(`No video with ${id} found!`);
+            throw new NotFoundException(`No video with ${id} found!`);
         }
 
         return video;
     }
 
-    public update(video: VideoModelDto) {
+    public update(video: VideoModelDto): VideoModelDto {
         const {id} = video;
         if (!this.videos[id]) {
-            throw Error(`No video with ${id} found!`);
+            throw new NotFoundException(`No video with ${id} found!`);
         }
 
         this.videos[id] = video;
         return video;
     }
 
-    public delete(id: string) {
+    public delete(id: string): void {
         if (!this.videos[id]) {
-            throw Error(`No video with ${id} found!`);
+            throw new NotFoundException(`No video with ${id} found!`);
         }
 
         delete this.videos[id];
