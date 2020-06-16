@@ -1,5 +1,4 @@
 import {IsOptional, IsString} from 'class-validator';
-import {VideoInterface} from '../../shared/interfaces/video.interface';
 
 export class VideoModelDto {
     @IsString()
@@ -12,14 +11,11 @@ export class VideoModelDto {
     @IsString()
     readonly posterImgUrl: string;
 
-    constructor(video: VideoInterface) {
+    constructor(video: VideoModelDto) {
         if (!video) {
             return;
         }
 
-        const {id, name, posterImgUrl} = video;
-        this.id = id;
-        this.name = name;
-        this.posterImgUrl = posterImgUrl;
+        Object.assign(this, video);
     }
 }

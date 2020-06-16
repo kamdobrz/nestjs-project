@@ -1,6 +1,7 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
 import {VideoModelDto} from '../dto/videos/video.dto';
 import {VideosDto} from '../dto/videos/videos.dto';
+import {VideoInterface} from '../shared/interfaces/video.interface';
 
 @Injectable()
 export class VideosService {
@@ -27,7 +28,7 @@ export class VideosService {
         return this.videos;
     }
 
-    public create(video: VideoModelDto): VideoModelDto {
+    public create(video: VideoInterface): VideoModelDto {
         const id = Date.now().toString();
         const createdVideo = new VideoModelDto({...video, id});
 

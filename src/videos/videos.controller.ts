@@ -8,7 +8,7 @@ export class VideosController {
     constructor(private readonly videosService: VideosService) {}
 
     @Get()
-    index(): VideosDto {
+    getVideos(): VideosDto {
         return this.videosService.findAll();
     }
 
