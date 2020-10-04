@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {JwtService} from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import {UserModelDto} from '../dto/users/user.dto';
+import {AuthCredentialsDto} from '../dto/users/user.dto';
 import {AuthInterface, UserValidationInterface} from '../shared/interfaces/auth.interface';
 import {UserInterface} from '../shared/interfaces/user.interface';
 import {UsersService} from '../users/users.service';
@@ -13,7 +13,7 @@ export class AuthService {
         private readonly userService: UsersService
     ) {}
 
-    public async validateUser (userData: UserModelDto): Promise<UserValidationInterface | null> {
+    public async validateUser (userData: AuthCredentialsDto): Promise<UserValidationInterface | null> {
         const {username, password: pass} = userData;
         const user = this.userService.findOne(username);
         const isPasswordValid = await bcrypt.compare(pass, user.password);
@@ -26,7 +26,7 @@ export class AuthService {
         return null;
     };
 
-    public register = async(userData: UserModelDto): Promise<boolean> =>
+    public register = async(userData: AuthCredentialsDto): Promise<boolean> =>
         await this.userService.create(userData);
 
     public login = ({username, id}: UserInterface): AuthInterface => ({

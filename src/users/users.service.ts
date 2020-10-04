@@ -1,13 +1,13 @@
 import {Injectable} from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import {UserModelDto} from '../dto/users/user.dto';
+import {AuthCredentialsDto} from '../dto/users/user.dto';
 import {UserInterface} from '../shared/interfaces/user.interface';
 
 @Injectable()
 export class UsersService {
     private users: UserInterface[] = [];
 
-    public create = async({username, password}: UserModelDto): Promise<boolean> => {
+    public create = async({username, password}: AuthCredentialsDto): Promise<boolean> => {
         const user = this.findOne(username);
         if (user) {
             return false;
