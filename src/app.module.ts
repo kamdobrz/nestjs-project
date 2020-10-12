@@ -9,9 +9,7 @@ import {MongooseModule} from '@nestjs/mongoose';
         VideosModule,
         AuthModule,
         UsersModule,
-        MongooseModule.forRoot(
-            `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}<dbname>?retryWrites=true&w=majority`
-        )
+        MongooseModule.forRoot(`${process.env.MONGO_URI}`)
     ]
 })
 
