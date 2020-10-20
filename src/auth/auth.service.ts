@@ -5,6 +5,7 @@ import {AuthCredentialsDto} from '../dto/users/user.dto';
 import {AuthInterface, UserValidationInterface} from '../shared/interfaces/auth.interface';
 import {UserInterface} from '../shared/interfaces/user.interface';
 import {UsersService} from '../users/users.service';
+import {User} from '../schemas/user.schema';
 
 @Injectable()
 export class AuthService {
@@ -13,9 +14,9 @@ export class AuthService {
         private readonly userService: UsersService
     ) {}
 
-    public async validateUser (userData: AuthCredentialsDto): Promise<UserValidationInterface | null> {
+    public async validateUser (userData: AuthCredentialsDto): Promise<Partial<UserValidationInterface> | null> {
         const {username, password: pass} = userData;
-        const user = this.userService.findOne(username);
+        const user = await this.userService.findOne(username);
         const isPasswordValid = await bcrypt.compare(pass, user.password);
 
         if (user && isPasswordValid) {
@@ -26,7 +27,7 @@ export class AuthService {
         return null;
     };
 
-    public register = async(userData: AuthCredentialsDto): Promise<boolean> =>
+    public register = async(userData: AuthCredentialsDto): Promise<User> =>
         await this.userService.create(userData);
 
     public login = ({username, id}: UserInterface): AuthInterface => ({
